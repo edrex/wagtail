@@ -66,16 +66,10 @@ class WagtailImageField(ImageField):
         if max_size is None:
             return
 
-        # Get the filesize
-        old_position = f.tell()
-        f.seek(0, 2)
-        file_size = f.tell()
-        f.seek(old_position)
-
         # Check the filesize
-        if file_size > max_size:
+        if f.size > max_size:
             raise ValidationError(self.error_messages['file_too_large'] % (
-                filesizeformat(file_size),
+                filesizeformat(f.size),
                 filesizeformat(max_size),
             ), code='file_too_large')
 
