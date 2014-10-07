@@ -74,7 +74,7 @@ def add(request):
             # Validation error
             return json_response({
                 'success': False,
-                'error_message': '\n'.join(["Hello"]),
+                'error_message': '\n'.join([str(e) for e in form.errors.values()]),
             })
 
     return render(request, 'wagtailimages/multiple/add.html', {
