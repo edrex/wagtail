@@ -452,7 +452,7 @@ class Page(six.with_metaclass(PageBase, MP_Node, ClusterableModel, index.Indexed
 
             try:
                 subpage = self.get_children().get(slug=child_slug)
-            except Page.DoesNotExist:
+            except ObjectDoesNotExist:
                 raise Http404
 
             return subpage.specific.route(request, remaining_components)
